@@ -12,6 +12,9 @@ export default class LocationForm extends React.Component {
             location: '',
             timeZone: '',
             regionId: '',
+            latitude: '',
+            longitude: '',
+
 
             message: {}
         };
@@ -20,6 +23,8 @@ export default class LocationForm extends React.Component {
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onTimeZoneChange = this.onTimeZoneChange.bind(this);
         this.onRegionIdChange = this.onRegionIdChange.bind(this);
+        this.onLatitudeChange = this.onLatitudeChange.bind(this);
+        this.onLongitudeChange = this.onLongitudeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         // In edit mode, the ID of the location is passed in through props
@@ -64,6 +69,20 @@ export default class LocationForm extends React.Component {
                                 value={this.state.regionId}
                                 onChange={this.onRegionIdChange}/>
                         </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Latitude</ControlLabel>
+                            <FormControl type='number'
+                                placeholder='Enter the latitude (optional)'
+                                value={this.state.latitude}
+                                onChange={this.onLatitudeChange}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Longitude</ControlLabel>
+                            <FormControl type='number'
+                                placeholder='Enter the longitude (optional)'
+                                value={this.state.longitude}
+                                onChange={this.onLongitudeChange}/>
+                        </FormGroup>
                         <Button type='submit'>Submit</Button>
                     </Form>
                 </div>
@@ -87,6 +106,14 @@ export default class LocationForm extends React.Component {
         this.setState({ regionId: parseInt(event.target.value) });
     }
 
+    onLatitudeChange(event) {
+        this.setState({latitude: parseFloat(event.target.value)});
+    }
+
+    onLongitudeChange(event) {
+        this.setState({longitude: parseFloat(event.target.value)});
+    }
+
     onSubmit(event) {
         event.preventDefault();
 
@@ -94,7 +121,9 @@ export default class LocationForm extends React.Component {
             siteName: this.state.siteName,
             location: this.state.location,
             timeZone: this.state.timeZone,
-            regionId: this.state.regionId ? this.state.regionId : null
+            regionId: this.state.regionId ? this.state.regionId : null,
+            latitude: this.state.latitude ? this.state.latitude : null,
+            longitude: this.state.longitude ? this.state.longitude : null
         };
 
         const request = this.props.id

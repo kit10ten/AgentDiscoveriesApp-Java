@@ -84,6 +84,7 @@ public class LocationsRoutes implements EntityCRUDRoutes {
         } catch (DateTimeException e) {
             throw new FailedRequestException(ErrorCode.INVALID_INPUT, "timeZone '" + location.getTimeZone() + "' is invalid", e);
         }
+
     }
 
     @Override

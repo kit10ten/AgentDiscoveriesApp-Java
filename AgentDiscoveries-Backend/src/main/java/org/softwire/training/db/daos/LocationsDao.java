@@ -39,6 +39,8 @@ public class LocationsDao {
                     .bind("site_name", location.getSiteName())
                     .bind("time_zone", location.getTimeZone())
                     .bind("region_id", location.getRegionId())
+                    .bind("latitude", location.getLatitude())
+                    .bind("longitude",location.getLongitude())
                     .executeAndReturnGeneratedKeys("location_id")
                     .mapTo(Integer.class)
                     .findOnly();
@@ -62,6 +64,8 @@ public class LocationsDao {
                     .bind("site_name", location.getSiteName())
                     .bind("time_zone", location.getTimeZone())
                     .bind("region_id", location.getRegionId())
+                    .bind("latitude", location.getLatitude())
+                    .bind("longitude", location.getLongitude())
                     .execute();
         }
     }
