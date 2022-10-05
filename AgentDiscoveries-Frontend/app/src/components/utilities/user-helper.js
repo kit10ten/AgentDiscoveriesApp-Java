@@ -17,6 +17,8 @@ export function clearUserInfo() {
 }
 
 export function isLoggedIn() {
+    //reload event added to is logged in function 
+    window.location.reload(false);
     return !!window.localStorage.getItem('Token');
 }
 
