@@ -41,7 +41,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     @Override
     protected LocationStatusReport validateThenMap(LocationStatusReportApiModel apiModel) {
 
-        if (apiModel.getStatus() <= 0 || apiModel.getStatus() > 100){
+        if (apiModel.getStatus() < 0 || apiModel.getStatus() > 100){
             throw new FailedRequestException(ErrorCode.INVALID_INPUT, apiModel.getStatus() + " is invalid - must be between 0 and 100");
         }
 
