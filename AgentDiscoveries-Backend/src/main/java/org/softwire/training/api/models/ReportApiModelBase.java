@@ -6,7 +6,7 @@ public class ReportApiModelBase {
 
     private int reportId;
     private String reportTitle;
-    private byte status;
+    private int status;
     private ZonedDateTime reportTime;
     private String reportBody;
     private int agentId;
