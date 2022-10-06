@@ -44,8 +44,10 @@ export default class LocationReportSubmit extends React.Component {
 
                     <FormGroup>
                         <ControlLabel>title</ControlLabel>
-                        <FormControl type='text' required
-                            componentClass='textarea' rows={1}
+                        <FormControl type='text'
+                            required
+                            componentClass='textarea' 
+                            rows={1}
                             placeholder='enter title'
                             value={this.state.title}
                             onChange={this.onTitleChange}
@@ -53,7 +55,8 @@ export default class LocationReportSubmit extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
-                        <FormControl componentClass='select' required
+                        <FormControl componentClass='select' 
+                            required
                             value={this.state.locationId}
                             onChange={this.onLocationChange}
                             id='location-select'>
@@ -64,7 +67,8 @@ export default class LocationReportSubmit extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Status</ControlLabel>
-                        <FormControl type='number' required
+                        <FormControl type='number' 
+                            required
                             placeholder='Enter numeric status code'
                             value={this.state.status}
                             onChange={this.onStatusChange}
@@ -74,8 +78,10 @@ export default class LocationReportSubmit extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Report</ControlLabel>
-                        <FormControl type='text' required
-                            componentClass='textarea' rows={6}
+                        <FormControl type='text' 
+                            required
+                            componentClass='textarea' 
+                            rows={6}
                             placeholder='Write report'
                             value={this.state.reportBody}
                             onChange={this.onReportBodyChange}

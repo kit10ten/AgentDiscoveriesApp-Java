@@ -27,8 +27,6 @@ public class ReportBase {
         this.reportTitle = reportTitle;
     }
 
-
-
     public int getStatus() {
         return status;
     }
