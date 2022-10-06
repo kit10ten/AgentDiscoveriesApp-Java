@@ -15,6 +15,7 @@ export default class LocationReportsSearch extends React.Component {
             locationId: '',
             fromTime: '',
             toTime: '',
+            title: '',
 
             results: [],
             message: {}
@@ -25,6 +26,7 @@ export default class LocationReportsSearch extends React.Component {
         this.onFromChange = this.onFromChange.bind(this);
         this.onToChange = this.onToChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onTitleChange = this.onTitleChange(this);
     }
 
     render() {
@@ -35,6 +37,13 @@ export default class LocationReportsSearch extends React.Component {
 
                     <Message message={this.state.message} />
 
+                    <FormGroup>
+                        <ControlLabel>Report Title</ControlLabel>
+                        <FormControl type='text'
+                            placeholder='Enter a title'
+                            value={this.state.title}
+                            onChange={this.onTitleChange}/>
+                    </FormGroup>
                     <FormGroup>
                         <ControlLabel>Agent Call Sign</ControlLabel>
                         <FormControl type='text'
@@ -67,6 +76,11 @@ export default class LocationReportsSearch extends React.Component {
         );
     }
 
+
+    onTitleChange(event){
+        this.setState({ title: event.target.value });
+    }
+
     onCallSignChange(event) {
         this.setState({ callSign: event.target.value });
     }
@@ -87,6 +101,7 @@ export default class LocationReportsSearch extends React.Component {
         event.preventDefault();
 
         const params = {
+            title: this.state.title,
             callSign: this.state.callSign,
             locationId: this.state.locationId,
             fromTime: this.state.fromTime && moment.utc(this.state.fromTime).startOf('day').toISOString(),
