@@ -19,11 +19,11 @@ public class ReportApiModelBase {
         this.reportId = reportId;
     }
 
-    public byte getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
