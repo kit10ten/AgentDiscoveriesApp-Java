@@ -45,6 +45,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
 
         LocationStatusReport model = new LocationStatusReport();
         model.setAgentId(apiModel.getAgentId());
+        model.setReportTitle(apiModel.getReportTitle());
         model.setLocationId(apiModel.getLocationId());
         model.setStatus(apiModel.getStatus());
         model.setReportTime(reportTimeUtc);
@@ -69,6 +70,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
         ZoneId locationTimeZone = ZoneId.of(timeZone);
 
         apiModel.setReportId(model.getReportId());
+        apiModel.setReportTitle(model.getReportTitle());
         apiModel.setAgentId(model.getAgentId());
         apiModel.setLocationId(model.getLocationId());
         apiModel.setStatus(model.getStatus());
@@ -82,6 +84,9 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     protected List<ReportSearchCriterion> parseSearchCriteria(Request req) {
         QueryParamsMap queryMap = req.queryMap();
         List<ReportSearchCriterion> searchCriteria = new ArrayList<>();
+        if (!isNullOrEmpty(queryMap.get("title").value())) {
+            searchCriteria.add(new AgentCallSignSearchCriterion(queryMap.get("title").value()));
+        }
 
         if (!isNullOrEmpty(queryMap.get("callSign").value())) {
             searchCriteria.add(new AgentCallSignSearchCriterion(queryMap.get("callSign").value()));

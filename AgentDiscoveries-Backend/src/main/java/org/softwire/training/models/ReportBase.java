@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class ReportBase {
 
     private int reportId;
+    private String reportTitle;
     private byte status;
     private LocalDateTime reportTime; // Always UTC in the DB
     private String reportBody;
@@ -45,4 +46,8 @@ public class ReportBase {
     public int getAgentId() { return agentId; }
 
     public void setAgentId(int agentId) { this.agentId = agentId; }
+
+    public String getReportTitle() { return reportTitle; }
+
+    public void setReportTitle(String reportTitle) { this.reportTitle = reportTitle; }
 }
