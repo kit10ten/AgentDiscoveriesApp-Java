@@ -71,7 +71,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     private LocationStatusReportApiModel mapReportAndTimezoneToApiModel(LocationStatusReport model, String timeZone) {
         LocationStatusReportApiModel apiModel = new LocationStatusReportApiModel();
 
-        if (model.getStatus() <= 0 || model.getStatus() > 100){
+        if (model.getStatus() < 0 || model.getStatus() > 100){
             throw new FailedRequestException(ErrorCode.INVALID_INPUT, model.getStatus() + " is invalid - must be between 0 and 100");
         }
 
