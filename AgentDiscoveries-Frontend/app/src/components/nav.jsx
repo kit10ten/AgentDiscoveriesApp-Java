@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {clearUserInfo, isAdmin, isLoggedIn} from './utilities/user-helper';
+import {clearUserInfo, isAdmin, isLoggedIn, isUser} from './utilities/user-helper';
 import logo from '../../static/agent.png';
+
 
 export default class NavigationBar extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export default class NavigationBar extends React.Component {
 
         this.state = {
             isLoggedIn: isLoggedIn(),
-            isAdmin: isAdmin()
+            isAdmin: isAdmin(),
+            isUser: isUser()
         };
 
         this.onLoginEvent = this.onLoginEvent.bind(this);
@@ -28,7 +30,8 @@ export default class NavigationBar extends React.Component {
     onLoginEvent() {
         this.setState({
             isLoggedIn: isLoggedIn(),
-            isAdmin: isAdmin()
+            isAdmin: isAdmin(),
+            isUser: isUser()
         });
     }
 
@@ -52,6 +55,28 @@ export default class NavigationBar extends React.Component {
             </Navbar>
         );
     }
+
+    renderUserOptions() {
+        return (
+            <Navbar.Collapse>
+                {this.state.isUser & this.state.isLoggedIn ? this.renderUserOptions() : null}
+                <Nav>
+                    <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
+                        Today's Message
+                    </NavItem>
+                </Nav>
+                <Nav pullRight>
+                    <NavItem componentClass={Link} href='/profile' to='/profile' eventKey={6}>
+                        Profile
+                    </NavItem>
+                    <NavItem id="logout-link" onClick={this.handleLogOut} href='/login' to='/login' eventKey={1}>
+                        Log Out
+                    </NavItem>
+                </Nav>
+            </Navbar.Collapse>
+        );
+    }
+
 
     renderLoggedIn() {
         return (
