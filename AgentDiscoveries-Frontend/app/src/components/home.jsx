@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import { reactComponent as Bond } from '../../static/james-bond-007.svg';
+
+//import { reactComponent as Bond } from '../../static/james-bond-007.svg';
 
 //import { Redirect } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
+
 
 export default class Home extends React.Component {
 
@@ -14,12 +18,12 @@ export default class Home extends React.Component {
 
 
         return (
-            <div>
-                <h1>Home Page</h1>
-                <Bond />
+            <div className="container-sm f" >
+                <h1  className="placeholder-wave fs-1">Home Page</h1>
+                
 
-                <h2>About </h2>
-                <main>
+                <h2 className="fs-2">About </h2>
+                <main className="fs-3">
                     <p>Bring to the table win-win survival strategies to ensure proactive domination.
                         At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.
                         User generated content in real-time will have multiple touchpoints for offshoring.
@@ -30,6 +34,11 @@ export default class Home extends React.Component {
                         Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
                     </p>
                 </main>
+                <div className="spinner-grow text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+
+                <Link to="/login"><button type="button" className="btn btn-primary" >Login</button></Link>
 
             </div>
         );

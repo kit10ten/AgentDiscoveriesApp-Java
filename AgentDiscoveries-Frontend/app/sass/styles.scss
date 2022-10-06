@@ -1,5 +1,7 @@
+@import "~bootstrap/scss/bootstrap";
+
 $background-color: rgb(238, 238, 238);
-$text-color: rgb(12, 12, 12);
+$text-color: rgb(177, 176, 176);
 $overlay-color: rgb(247, 197, 89);
 
 body {
@@ -76,4 +78,21 @@ body {
 
 .profile-img-container:hover .overlay {
   opacity: 0.8;
+}
+
+.contentContainer{
+  height: 100vh;
+  width: 100%;
+}
+#react-root {
+  height: 100vh;
+}
+body {
+  height: 100vh;
+}
+
+.navbar{
+  margin-bottom: 0%;
+  max-height: 70px;
+  flex-wrap: nowrap;
 }
