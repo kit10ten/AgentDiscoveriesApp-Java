@@ -120,11 +120,10 @@ export default class NavigationBar extends React.Component {
         );
     }
 
-    //handle page automatic refresh
-
 
     handleLogOut(event) {
         event.preventDefault();
+        //added to fix navbar reload so happening automatic PJB
         window.location.reload(false);
         clearUserInfo();
         window.location.hash = '#/';
