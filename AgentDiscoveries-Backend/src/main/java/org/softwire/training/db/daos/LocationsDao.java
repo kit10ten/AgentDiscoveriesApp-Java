@@ -33,8 +33,8 @@ public class LocationsDao {
 
     public int createLocation(Location location) {
         try (Handle handle = jdbi.open()) {
-            return handle.createUpdate("INSERT INTO locations (location, site_name, time_zone, region_id) " +
-                    "VALUES (:location, :site_name, :time_zone, :region_id)")
+            return handle.createUpdate("INSERT INTO locations (location, site_name, time_zone, region_id, latitude, longitude) " +
+                    "VALUES (:location, :site_name, :time_zone, :region_id, :latitude, :longitude)")
                     .bind("location", location.getLocation())
                     .bind("site_name", location.getSiteName())
                     .bind("time_zone", location.getTimeZone())
@@ -57,8 +57,8 @@ public class LocationsDao {
 
     public void updateLocation(Location location) {
         try (Handle handle = jdbi.open()) {
-            handle.createUpdate("UPDATE locations SET location = :location, site_name = :site_name, " +
-                    "time_zone = :time_zone, region_id = :region_id WHERE location_id = :location_id")
+            handle.createUpdate("UPDATE locations SET location = :location, site_name = :site_name," +
+                    "time_zone = :time_zone, region_id = :region_id, latitude = :latitude, longitude = :longitude  WHERE location_id = :location_id")
                     .bind("location_id", location.getLocationId())
                     .bind("location", location.getLocation())
                     .bind("site_name", location.getSiteName())

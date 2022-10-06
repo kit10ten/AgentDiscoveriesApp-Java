@@ -35,7 +35,7 @@ export default class LocationForm extends React.Component {
 
     render() {
         return (
-            <div className='col-md-8 col-md-offset-2'>
+            <div className='col-md-8 col-md-offset-4'>
                 <Message message={this.state.message} />
                 <div className='col-md-12'>
                     <Form onSubmit={this.onSubmit}>
