@@ -54,7 +54,8 @@ public class LocationReportsDao implements ReportsDao<LocationStatusReport> {
         String whereClause = ReportsDaoUtils.buildWhereSubClauseFromCriteria(searchCriteria);
 
         try (Handle handle = jdbi.open()) {
-             Query query = handle.createQuery("SELECT * FROM location_reports" + whereClause);
+             Query query = handle.createQuery("SELECT agents.agent_id, location_id, report_body, report_id, status, report_time " +
+              "FROM location_reports location LEFT JOIN agents ON agents.agent_id = location.agent_id" + whereClause);
 
              for (ReportSearchCriterion criterion : searchCriteria) {
                  for (Map.Entry<String, Object> bindingEntry : criterion.getBindingsForSql().entrySet()) {
