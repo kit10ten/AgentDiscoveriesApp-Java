@@ -11,6 +11,7 @@ export default class LocationReportSubmit extends React.Component {
         this.state = {
             locations: [],
 
+            title: '',
             locationId: '',
             status: '',
             reportBody: '',
@@ -19,6 +20,7 @@ export default class LocationReportSubmit extends React.Component {
             messages: []
         };
 
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.onReportBodyChange = this.onReportBodyChange.bind(this);
@@ -40,6 +42,15 @@ export default class LocationReportSubmit extends React.Component {
 
                     <Messages messages={this.state.messages}/>
 
+                    <FormGroup>
+                        <ControlLabel>title</ControlLabel>
+                        <FormControl type='text' required
+                            componentClass='textarea' rows={1}
+                            placeholder='enter title'
+                            value={this.state.title}
+                            onChange={this.onTitleChange}
+                            id="report-title"/>
+                    </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
                         <FormControl componentClass='select' required
@@ -81,6 +92,10 @@ export default class LocationReportSubmit extends React.Component {
         );
     }
 
+    onTitleChange(event) {
+        this.setState({ title: event.target.value });
+    }
+
     onLocationChange(event) {
         this.setState({ locationId: event.target.value && parseInt(event.target.value) });
     }
@@ -103,6 +118,7 @@ export default class LocationReportSubmit extends React.Component {
         this.setState({ messages: [] });
 
         const body = {
+            reportTitle: this.state.title,
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,
