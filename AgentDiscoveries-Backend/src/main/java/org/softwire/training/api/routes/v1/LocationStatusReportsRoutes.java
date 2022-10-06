@@ -40,6 +40,11 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
 
     @Override
     protected LocationStatusReport validateThenMap(LocationStatusReportApiModel apiModel) {
+
+        if (apiModel.getStatus() <= 0 || apiModel.getStatus() > 100){
+            throw new FailedRequestException(ErrorCode.INVALID_INPUT, apiModel.getStatus() + " is invalid - must be between 0 and 100");
+        }
+
         // Ignore any supplied report time
         LocalDateTime reportTimeUtc = LocalDateTime.now(ZoneOffset.UTC);
 
@@ -65,6 +70,10 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
 
     private LocationStatusReportApiModel mapReportAndTimezoneToApiModel(LocationStatusReport model, String timeZone) {
         LocationStatusReportApiModel apiModel = new LocationStatusReportApiModel();
+
+        if (model.getStatus() <= 0 || model.getStatus() > 100){
+            throw new FailedRequestException(ErrorCode.INVALID_INPUT, model.getStatus() + " is invalid - must be between 0 and 100");
+        }
 
         ZoneId locationTimeZone = ZoneId.of(timeZone);
 
