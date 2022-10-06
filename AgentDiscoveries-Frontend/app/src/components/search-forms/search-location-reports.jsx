@@ -26,7 +26,7 @@ export default class LocationReportsSearch extends React.Component {
         this.onFromChange = this.onFromChange.bind(this);
         this.onToChange = this.onToChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onTitleChange = this.onTitleChange(this);
+        this.onTitleChange = this.onTitleChange.bind(this);
     }
 
     render() {
