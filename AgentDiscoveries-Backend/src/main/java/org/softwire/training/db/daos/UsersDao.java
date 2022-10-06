@@ -38,6 +38,7 @@ public class UsersDao {
                     .list();
         }
     }
+    
 
     public int addUser(User user) {
         try (Handle handle = jdbi.open()) {

@@ -1,0 +1,2 @@
+ALTER TABLE users ADD COLUMN isUser BOOLEAN NOT NULL DEFAULT FALSE;
+UPDATE users SET isUser = TRUE WHERE username='test_user';

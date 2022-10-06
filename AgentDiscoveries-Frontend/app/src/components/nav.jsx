@@ -56,10 +56,21 @@ export default class NavigationBar extends React.Component {
         );
     }
 
+    renderUserLoggedIn() { 
+        return( {
+
+        });
+    }
+
+
+
+
+
+
+
     renderUserOptions() {
         return (
             <Navbar.Collapse>
-                {this.state.isUser & this.state.isLoggedIn ? this.renderUserOptions() : null}
                 <Nav>
                     <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
                         Today's Message
@@ -83,14 +94,15 @@ export default class NavigationBar extends React.Component {
             <Navbar.Collapse>
                 {this.state.isAdmin ? this.renderAdminOptions() : null}
                 <Nav>
-                    <NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
+                    {! this.state.isUser ? (<NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
                         <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={4.1}>
                             Location Report
                         </MenuItem>
                         <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
                             Region Summary
                         </MenuItem>
-                    </NavDropdown>
+                    </NavDropdown>) : null
+                    }
                     <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
                         Today's Message
                     </NavItem>
