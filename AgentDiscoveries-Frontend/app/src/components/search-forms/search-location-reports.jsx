@@ -6,6 +6,8 @@ import Message from '../message';
 import SearchResult from './search-result';
 import {apiGet} from '../utilities/request-helper';
 
+
+
 export default class LocationReportsSearch extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,7 @@ export default class LocationReportsSearch extends React.Component {
             locationId: '',
             fromTime: '',
             toTime: '',
-
+            callSigns:[],
             results: [],
             message: {}
         };
@@ -25,22 +27,38 @@ export default class LocationReportsSearch extends React.Component {
         this.onFromChange = this.onFromChange.bind(this);
         this.onToChange = this.onToChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.loadCallSigns = this.loadCallSigns(this);
     }
 
+    
+    
+
     render() {
+
+        
+
+        
         return (
+
+    
             <div className='col-md-8 col-md-offset-2'>
+               
                 <Form onSubmit={this.onSubmit}>
                     <h3>Search Location Reports</h3>
 
                     <Message message={this.state.message} />
 
-                    <FormGroup>
+                    <FormGroup >
                         <ControlLabel>Agent Call Sign</ControlLabel>
-                        <FormControl type='text'
-                            placeholder='Enter agent Call Sign'
-                            value={this.state.callSign}
-                            onChange={this.onCallSignChange}/>
+                        <FormControl  onMouseMove={this.loadCallSigns} type="text" list="data" onChange={this._onChange} />
+                        
+                        <datalist id="data">
+                            {this.state.callSigns.map((item,index) =>
+                                <option key={index} value={item.callSign} />
+                            )}
+                        </datalist>
+                        
+
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
@@ -99,4 +117,22 @@ export default class LocationReportsSearch extends React.Component {
             .then(results => this.setState({ results: results, message: {} }))
             .catch(error => this.setState({ message: { message: error.message, type: 'danger' } }));
     }
+
+    loadCallSigns(event){
+
+        const url = '/agents';
+
+        try {
+            apiGet(url).then(resultarr => {
+                console.log(resultarr[0]);
+                this.setState({ callSigns : resultarr});
+                console.log(this.setState.callSigns[0]);
+            });
+
+        } catch (error) {
+            return this.setState({ message: { message: error.message, type: 'danger' } });
+        }
+    }
+
+    
 }
