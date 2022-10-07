@@ -1,5 +1,5 @@
 $background: url("../static/cool-background.png");
-$text-color: rgb(210, 199, 199);
+$text-color: antiquewhite;
 $overlay-color: rgb(247, 197, 89);
 $background-color: white;
 
@@ -85,4 +85,8 @@ body {
 
 #report-input {
    resize: none;
+}
+
+input{
+  color:black;
 }

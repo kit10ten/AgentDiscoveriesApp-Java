@@ -43,7 +43,7 @@ export default class Home extends React.Component {
             }
         };
         return (
-            <div className="container-sm f" >
+            <div className="container-sm f" id="homepage" >
                 <h1  className="placeholder-wave fs-1">Home Page</h1>
                 
 
