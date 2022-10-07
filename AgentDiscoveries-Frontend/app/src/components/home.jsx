@@ -49,14 +49,17 @@ export default class Home extends React.Component {
 
                 <h2 className="fs-2">About </h2>
                 <main className="fs-3">
-                    <p>Bring to the table win-win survival strategies to ensure proactive domination.
-                        At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.
-                        User generated content in real-time will have multiple touchpoints for offshoring.
+                    <b>
+                        IF YOU ARE NOT ASSOCIATED WITH THE WORLDS GREATEST SECRET AGENTS, LEAVE IMMEDIETELY,
+                        NO UNAUTHORISED ACCESS ALLOWED
+                    </b>
+                    <p></p>
+                    <p>
+                        This is the home of the worlds greatest secret agents! AEAOA (American Express Association Of Agents) welcome!
                     </p>
                     <p>
-                        Leverage agile frameworks to provide a robust synopsis for high level overviews.
-                        Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.
-                        Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+                        You will find all the necessary facilities to complete your daily tasks so you can get paid at the end of the month! 
+                        If you require immediete assistance, please email our head agent, rogerthebestagent@aeaoa.softwire.agent.com
                     </p>
                 </main>
                 
