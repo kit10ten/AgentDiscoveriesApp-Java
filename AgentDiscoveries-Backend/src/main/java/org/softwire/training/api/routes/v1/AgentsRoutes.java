@@ -12,8 +12,7 @@ import spark.Response;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.time.LocalDate;
-import java.util.Optional;
+
 
 public class AgentsRoutes {
 

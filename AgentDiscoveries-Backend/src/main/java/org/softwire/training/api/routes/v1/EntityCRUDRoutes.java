@@ -1,10 +1,7 @@
 package org.softwire.training.api.routes.v1;
 
-import org.softwire.training.api.models.FailedRequestException;
 import spark.Request;
 import spark.Response;
-
-import java.util.List;
 
 public interface EntityCRUDRoutes {
 

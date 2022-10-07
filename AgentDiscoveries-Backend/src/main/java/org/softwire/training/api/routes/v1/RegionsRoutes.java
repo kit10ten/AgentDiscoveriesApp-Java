@@ -4,7 +4,6 @@ import org.softwire.training.api.core.JsonRequestUtils;
 import org.softwire.training.api.core.PermissionsVerifier;
 import org.softwire.training.api.models.ErrorCode;
 import org.softwire.training.api.models.FailedRequestException;
-import org.softwire.training.db.daos.LocationsDao;
 import org.softwire.training.db.daos.RegionsDao;
 import org.softwire.training.models.Region;
 import spark.Request;
