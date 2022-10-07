@@ -2,6 +2,7 @@ import * as React from 'react';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Login from './user/login';
+import TokenExpireLogin from './user/token-expired-login';
 import Home from './home';
 import Page from './page';
 import Profile from './profile/profile';
@@ -27,6 +28,7 @@ export default class App extends React.Component {
                     <Switch>
                         <Route path='/' exact render={() => <Page><Home /></Page>} />
                         <Route path='/login' render={() => <Page><Login /></Page>} />
+                        <Route path='/expirelogin' render={() => <Page><TokenExpireLogin /></Page>} />
                         <Route path='/search/location' render={() => <Page><LocationReportSearch /></Page>} />
                         <Route path='/search/region' render={() => <Page><RegionSummarySearch /></Page>} />
                         <Route path='/submit/location' render={() => <Page><LocationReportSubmit /></Page>} />
