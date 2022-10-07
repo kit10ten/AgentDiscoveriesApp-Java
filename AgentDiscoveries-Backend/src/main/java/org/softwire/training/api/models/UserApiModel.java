@@ -54,7 +54,6 @@ public class UserApiModel {
         this.admin = admin;
     }
 
-
     public boolean getIsUser() {
         return isUser;
     }

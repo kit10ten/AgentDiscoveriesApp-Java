@@ -30,8 +30,5 @@ public class TokenResponseApiModel {
 
     public boolean getIsUser(){return isUser;}
 
-    
-
-
 }   
 

@@ -68,8 +68,7 @@ export default class NavigationBar extends React.Component {
                         <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
                             Region Summary
                         </MenuItem>
-                    </NavDropdown>) : null
-                    }
+                    </NavDropdown>) : null}
                     <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
                         Today's Message
                     </NavItem>
@@ -123,7 +122,6 @@ export default class NavigationBar extends React.Component {
             </Navbar.Collapse>
         );
     }
-
 
     handleLogOut(event) {
         event.preventDefault();

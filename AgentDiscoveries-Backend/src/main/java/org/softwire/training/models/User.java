@@ -55,7 +55,6 @@ public class User {
 
     public void setAdmin(boolean admin){this.admin=admin;}
 
-
     public boolean isUser() {return user;}
 
     public void setUser(boolean user) {this.user = user;}
