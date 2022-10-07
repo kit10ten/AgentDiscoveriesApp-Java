@@ -65,6 +65,7 @@ public class LocationsRoutes implements EntityCRUDRoutes {
         if (location.getLocationId() != id && location.getLocationId() != 0) {
             throw new FailedRequestException(ErrorCode.INVALID_INPUT, "locationId cannot be specified differently to URI");
         }
+
         // Perform validations of model before storing
         validateLocationModel(location);
 
@@ -84,6 +85,7 @@ public class LocationsRoutes implements EntityCRUDRoutes {
         } catch (DateTimeException e) {
             throw new FailedRequestException(ErrorCode.INVALID_INPUT, "timeZone '" + location.getTimeZone() + "' is invalid", e);
         }
+
     }
 
     @Override

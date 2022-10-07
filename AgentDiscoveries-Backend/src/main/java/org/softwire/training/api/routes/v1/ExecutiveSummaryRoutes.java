@@ -8,17 +8,14 @@ import org.softwire.training.db.daos.LocationReportsDao;
 import org.softwire.training.db.daos.LocationsDao;
 import org.softwire.training.db.daos.RegionSummaryReportsDao;
 import org.softwire.training.db.daos.searchcriteria.FromTimeSearchCriterion;
-import org.softwire.training.db.daos.searchcriteria.ReportSearchCriterion;
 import org.softwire.training.models.*;
 import spark.Request;
 import spark.Response;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
