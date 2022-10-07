@@ -8,7 +8,6 @@ import {errorLogAndRedirect} from '../error';
 export default class Entities extends React.Component {
     constructor (props) {
         super(props);
-
         this.state = {
             entities: []
         };

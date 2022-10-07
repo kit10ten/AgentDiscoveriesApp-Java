@@ -7,7 +7,7 @@ import Page from './page';
 import Profile from './profile/profile';
 import EditProfilePicture from './profile/edit-profile-picture';
 import EditProfileCallSign from './profile/edit-profile-callsign';
-
+import ExecutiveSummary from './admin/executive-summary-reports';
 import LocationReportSearch from './search-forms/search-location-reports';
 import RegionSummarySearch from './search-forms/search-region-summaries';
 import LocationReportSubmit from './submit-forms/submit-location-report';
@@ -18,6 +18,7 @@ import LocationForm from './admin/location-form';
 import RegionForm from './admin/region-form';
 import UserForm from './admin/user-form';
 import Error from './error';
+import ExecutiveSummary from './admin/executive-summary-reports';
 
 export default class App extends React.Component {
     render() {
@@ -35,6 +36,8 @@ export default class App extends React.Component {
                         <Route path='/admin/locations' exact render={() => <Page><Entities api='locations' key='locations'/></Page>} />
                         <Route path='/admin/regions' exact render={() => <Page><Entities api='regions' key='regions'/></Page>} />
                         <Route path='/admin/users' exact render={() => <Page><Entities api='users' key='users'/></Page>} />
+                        {/* added execsumm route PJB */}
+                        <Route path='/admin/execsumm' exact render={() => <Page><ExecutiveSummary /></Page>} />
 
                         <Route path='/admin/locations/add' render={() => <Page><LocationForm/></Page>} />
                         <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />
