@@ -1,5 +1,6 @@
 package org.softwire.training.db.daos;
 
+import org.apache.commons.text.WordUtils;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
@@ -27,8 +28,9 @@ public class LocationReportsDao implements ReportsDao<LocationStatusReport> {
 
     public int createReport(LocationStatusReport report) {
         try (Handle handle = jdbi.open()) {
-            return handle.createUpdate("INSERT INTO location_reports (location_id, agent_id, status, report_time, report_body)" +
-                    " VALUES (:location_id, :agent_id, :status, :report_time, :report_body)")
+            return handle.createUpdate("INSERT INTO location_reports (report_title, location_id, agent_id, status, report_time, report_body)" +
+                    " VALUES (:report_title, :location_id, :agent_id, :status, :report_time, :report_body)")
+                    .bind("report_title", WordUtils.capitalizeFully(report.getReportTitle()))
                     .bind("location_id", report.getLocationId())
                     .bind("agent_id", report.getAgentId())
                     .bind("status", report.getStatus())
@@ -52,7 +54,8 @@ public class LocationReportsDao implements ReportsDao<LocationStatusReport> {
         String whereClause = ReportsDaoUtils.buildWhereSubClauseFromCriteria(searchCriteria);
 
         try (Handle handle = jdbi.open()) {
-             Query query = handle.createQuery("SELECT * FROM location_reports" + whereClause);
+             Query query = handle.createQuery("SELECT agents.agent_id, location_id, report_body, report_id, status, report_time " +
+              "FROM location_reports location LEFT JOIN agents ON agents.agent_id = location.agent_id" + whereClause);
 
              for (ReportSearchCriterion criterion : searchCriteria) {
                  for (Map.Entry<String, Object> bindingEntry : criterion.getBindingsForSql().entrySet()) {

@@ -19,6 +19,14 @@ public class ReportBase {
         this.reportId = reportId;
     }
 
+    public String getReportTitle() {
+        return reportTitle;
+    }    
+
+    public void setReportTitle(String reportTitle){
+        this.reportTitle = reportTitle;
+    }
+
     public int getStatus() {
         return status;
     }

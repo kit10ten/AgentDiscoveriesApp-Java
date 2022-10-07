@@ -49,6 +49,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
         LocalDateTime reportTimeUtc = LocalDateTime.now(ZoneOffset.UTC);
 
         LocationStatusReport model = new LocationStatusReport();
+        model.setReportTitle(apiModel.getReportTitle());
         model.setAgentId(apiModel.getAgentId());
         model.setReportTitle(apiModel.getReportTitle());
         model.setLocationId(apiModel.getLocationId());
