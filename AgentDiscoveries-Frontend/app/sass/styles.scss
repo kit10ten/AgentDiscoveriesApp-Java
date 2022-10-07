@@ -1,9 +1,11 @@
-$background-color: rgb(238, 238, 238);
-$text-color: rgb(12, 12, 12);
+$background: url("../static/cool-background.png");
+$text-color: antiquewhite;
+
 $overlay-color: rgb(247, 197, 89);
+$background-color: white;
 
 body {
-  background-color: $background-color;
+  background-image:$background;
   color: $text-color;
 }
 
@@ -84,4 +86,18 @@ body {
 
 #report-input {
    resize: none;
+}
+
+input{
+  color:black;
+
+}
+
+tbody{
+  color:black;
+  background-color: #ededed;
+}
+
+.panel{
+  color:black
 }

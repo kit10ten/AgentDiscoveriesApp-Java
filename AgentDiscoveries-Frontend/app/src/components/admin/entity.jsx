@@ -20,9 +20,20 @@ export default class Entity extends React.Component {
             </tr>
         );
     }
-    
+
+    getPossibleColumnsForType(tableType){
+        switch(tableType){
+            case 'locations':
+                return ['locationId','siteName','location','timeZone', 'regionId','latitude','longitude','name'];
+            case 'regions':
+                return ['regionId', 'name'];
+            case 'users':
+                return ['userId', 'username', 'admin'];
+        }
+    }
+
     getEntityRow() {
-        const possibleColumns = ['locationId','siteName','location','timeZone', 'regionId','latitude','longitude'];
+        const possibleColumns = this.getPossibleColumnsForType(this.props.type);
         return possibleColumns.map(columnName =>
             <td key={columnName}>{this.props.entity[columnName] ? this.props.entity[columnName].toString() : '-'}</td>);
     }

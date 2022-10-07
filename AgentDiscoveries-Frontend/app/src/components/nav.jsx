@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {clearUserInfo, isAdmin, isLoggedIn} from './utilities/user-helper';
+import {clearUserInfo, isAdmin, isLoggedIn, isUser} from './utilities/user-helper';
 import logo from '../../static/agent.png';
+
 
 export default class NavigationBar extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export default class NavigationBar extends React.Component {
 
         this.state = {
             isLoggedIn: isLoggedIn(),
-            isAdmin: isAdmin()
+            isAdmin: isAdmin(),
+            isUser: isUser()
         };
 
         this.onLoginEvent = this.onLoginEvent.bind(this);
@@ -28,7 +30,8 @@ export default class NavigationBar extends React.Component {
     onLoginEvent() {
         this.setState({
             isLoggedIn: isLoggedIn(),
-            isAdmin: isAdmin()
+            isAdmin: isAdmin(),
+            isUser: isUser()
         });
     }
 
@@ -58,14 +61,14 @@ export default class NavigationBar extends React.Component {
             <Navbar.Collapse>
                 {this.state.isAdmin ? this.renderAdminOptions() : null}
                 <Nav>
-                    <NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
+                    {! this.state.isUser ? (<NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
                         <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={4.1}>
                             Location Report
                         </MenuItem>
                         <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
                             Region Summary
                         </MenuItem>
-                    </NavDropdown>
+                    </NavDropdown>) : null}
                     <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
                         Today's Message
                     </NavItem>
@@ -126,5 +129,6 @@ export default class NavigationBar extends React.Component {
         window.location.reload(false);
         clearUserInfo();
         window.location.hash = '#/';
+        window.location.reload();
     }
 }
