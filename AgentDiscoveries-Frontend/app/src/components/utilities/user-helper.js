@@ -17,6 +17,7 @@ export function clearUserInfo() {
 }
 
 export function isLoggedIn() {
+     
     return !!window.localStorage.getItem('Token');
 }
 
