@@ -5,20 +5,20 @@ import java.util.Map;
 
 public final class ReportTitleSearchCriterion extends ReportSearchCriterion {
 
-    private static final String REPORT_TITLE_BINDING_NAME = "report_title_sc_report_title";
+    private static String REPORT_TITLE_BINDING_NAME = "report_title_sc_report_title";
     private final String reportTitle;
 
     public ReportTitleSearchCriterion(String reportTitle) {
-        this.reportTitle = reportTitle;
+        this.reportTitle = reportTitle.replace("'", "");
     }
 
     @Override
     public String getSqlForWhereClause() {
-        return "report_title LIKE %:" + REPORT_TITLE_BINDING_NAME + "%";
+        return "report_title LIKE CONCAT('%',:"+REPORT_TITLE_BINDING_NAME+",'%')";
     }
 
     @Override
     public Map<String, Object> getBindingsForSql() {
-        return Collections.singletonMap(REPORT_TITLE_BINDING_NAME, reportTitle);
+        return Collections.singletonMap(REPORT_TITLE_BINDING_NAME, this.reportTitle);
     }
 }

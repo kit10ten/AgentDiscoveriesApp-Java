@@ -57,12 +57,4 @@ public class ReportApiModelBase {
     public void setAgentId(int agentId) {
         this.agentId = agentId;
     }
-
-    public void setReportTitle(String reportTitle) {
-        this.reportTitle = reportTitle;
-    }
-
-    public String getReportTitle(){
-        return this.reportTitle;
-    }
 }
