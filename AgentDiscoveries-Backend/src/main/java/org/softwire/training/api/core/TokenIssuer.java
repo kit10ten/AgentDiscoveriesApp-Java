@@ -36,8 +36,7 @@ public class TokenIssuer {
 
     private Instant getExpirationInstantForTokenIssuedNow() {
         return ZonedDateTime.now(ZoneOffset.UTC)
-                // .plusHours(24)
-                .plusSeconds(15)
+                .plusHours(24)
                 .toInstant();
     }
 
