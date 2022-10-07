@@ -20,12 +20,13 @@ export default class Entity extends React.Component {
             </tr>
         );
     }
-
+    
     getEntityRow() {
-        return Object.keys(this.props.entity).map(key =>
-            <td key={key}>{this.props.entity[key].toString()}</td>);
+        const possibleColumns = ['locationId','siteName','location','timeZone', 'regionId','latitude','longitude'];
+        return possibleColumns.map(columnName =>
+            <td key={columnName}>{this.props.entity[columnName] ? this.props.entity[columnName].toString() : '-'}</td>);
     }
-
+    
     getEditButton() {
         return (
             <Link to={`/admin/${this.props.type}/edit/${this.id}`}>

@@ -48,7 +48,7 @@ export default class NavigationBar extends React.Component {
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                 </Navbar.Header>
-                {this.state.isLoggedIn ? this.renderLoggedIn() : this.renderLoggedOut() }
+                {this.state.isLoggedIn ?this.renderLoggedIn() : this.renderLoggedOut() }
             </Navbar>
         );
     }
@@ -120,9 +120,11 @@ export default class NavigationBar extends React.Component {
         );
     }
 
+
     handleLogOut(event) {
         event.preventDefault();
-
+        //added to fix navbar reload so happening automatic PJB
+        window.location.reload(false);
         clearUserInfo();
         window.location.hash = '#/';
         window.location.reload();

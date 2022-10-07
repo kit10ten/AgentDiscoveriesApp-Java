@@ -11,6 +11,7 @@ export default class LocationReportSubmit extends React.Component {
         this.state = {
             locations: [],
 
+            title: '',
             locationId: '',
             status: '',
             reportBody: '',
@@ -19,6 +20,7 @@ export default class LocationReportSubmit extends React.Component {
             messages: []
         };
 
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.onReportBodyChange = this.onReportBodyChange.bind(this);
@@ -41,8 +43,20 @@ export default class LocationReportSubmit extends React.Component {
                     <Messages messages={this.state.messages}/>
 
                     <FormGroup>
+                        <ControlLabel>title</ControlLabel>
+                        <FormControl type='text'
+                            required
+                            componentClass='textarea' 
+                            rows={1}
+                            placeholder='enter title'
+                            value={this.state.title}
+                            onChange={this.onTitleChange}
+                            id="report-title"/>
+                    </FormGroup>
+                    <FormGroup>
                         <ControlLabel>Location</ControlLabel>
-                        <FormControl componentClass='select' required
+                        <FormControl componentClass='select' 
+                            required
                             value={this.state.locationId}
                             onChange={this.onLocationChange}
                             id='location-select'>
@@ -53,16 +67,21 @@ export default class LocationReportSubmit extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Status</ControlLabel>
-                        <FormControl type='number' required
+                        <FormControl type='number' 
+                            required
                             placeholder='Enter numeric status code'
                             value={this.state.status}
                             onChange={this.onStatusChange}
-                            id="status-input"/>
+                            id="status-input"
+                            min={0}
+                            max={100}/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Report</ControlLabel>
-                        <FormControl type='text' required
-                            componentClass='textarea' rows={6}
+                        <FormControl type='text' 
+                            required
+                            componentClass='textarea' 
+                            rows={6}
                             placeholder='Write report'
                             value={this.state.reportBody}
                             onChange={this.onReportBodyChange}
@@ -79,6 +98,10 @@ export default class LocationReportSubmit extends React.Component {
                 </Form>
             </div>
         );
+    }
+
+    onTitleChange(event) {
+        this.setState({ title: event.target.value });
     }
 
     onLocationChange(event) {
@@ -103,6 +126,7 @@ export default class LocationReportSubmit extends React.Component {
         this.setState({ messages: [] });
 
         const body = {
+            reportTitle: this.state.title,
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,

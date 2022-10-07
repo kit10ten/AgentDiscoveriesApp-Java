@@ -117,3 +117,6 @@ Make sure the app is already running, then you can run/debug each test individua
 
 Changing `WebDriverHelper.HEADLESS` to `false` will cause a visible Chrome window to pop up,
 which is usually much easier to debug!
+
+## Migration files
+Read '***MigrationDocs.md***' before creating or editing migration files within your project

@@ -5,7 +5,8 @@ import java.time.ZonedDateTime;
 public class ReportApiModelBase {
 
     private int reportId;
-    private byte status;
+    private String reportTitle;
+    private int status;
     private ZonedDateTime reportTime;
     private String reportBody;
     private int agentId;
@@ -18,11 +19,18 @@ public class ReportApiModelBase {
         this.reportId = reportId;
     }
 
-    public byte getStatus() {
+    public String getReportTitle() {
+        return reportTitle;
+    }    
+
+    public void setReportTitle(String reportTitle){
+        this.reportTitle = reportTitle;
+    }
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
