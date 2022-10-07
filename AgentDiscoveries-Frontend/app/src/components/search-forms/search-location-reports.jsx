@@ -76,7 +76,6 @@ export default class LocationReportsSearch extends React.Component {
         );
     }
 
-
     onTitleChange(event){
         this.setState({ title: event.target.value });
     }

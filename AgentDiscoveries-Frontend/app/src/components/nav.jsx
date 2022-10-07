@@ -120,7 +120,6 @@ export default class NavigationBar extends React.Component {
         );
     }
 
-
     handleLogOut(event) {
         event.preventDefault();
         //added to fix navbar reload so happening automatic PJB
@@ -129,6 +128,3 @@ export default class NavigationBar extends React.Component {
         window.location.hash = '#/';
     }
 }
-
-
-// mvn clean package && java -jar AgentDiscoveries-Backend/target/agentdiscoveries-backend-1.0-SNAPSHOT.jar

@@ -201,5 +201,3 @@ public class AgentDiscoveriesApplication implements Runnable {
         }
     }
 }
-
-// mvn clean package && java -jar AgentDiscoveries-Backend/target/agentdiscoveries-backend-1.0-SNAPSHOT.jar
