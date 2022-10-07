@@ -10,7 +10,6 @@ export default class RegionSummarySubmit extends React.Component {
 
         this.state = {
             regions: [],
-
             regionId: '',
             status: '',
             reportBody: '',
