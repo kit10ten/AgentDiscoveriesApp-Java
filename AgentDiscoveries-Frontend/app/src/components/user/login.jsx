@@ -84,6 +84,8 @@ export default class Login extends React.Component {
             .then(response => {
                 UserHelper.storeUserInfo(response);
                 window.location.hash = '#/';
+                //added page reload to login response control PJB
+                window.location.reload(false);
             })
             .catch(error => {
                 this.setState({ message: { message: error.message, type: 'danger' } });
