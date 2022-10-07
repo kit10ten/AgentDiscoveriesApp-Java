@@ -20,7 +20,8 @@ export function apiRequest(apiPath, method, body) {
         } else if (response.status === 401) {
             // Token is no longer valid - clear it and redirect to login
             clearUserInfo();
-            window.location.hash = '#/';
+            window.location.hash = '#/expirelogin';
+            window.location.reload();
             throw new Error('Authentication Token has expired, please log in');
         } else {
             throw new ApiError(response);
