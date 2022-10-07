@@ -56,39 +56,6 @@ export default class NavigationBar extends React.Component {
         );
     }
 
-    renderUserLoggedIn() { 
-        return( {
-
-        });
-    }
-
-
-
-
-
-
-
-    renderUserOptions() {
-        return (
-            <Navbar.Collapse>
-                <Nav>
-                    <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
-                        Today's Message
-                    </NavItem>
-                </Nav>
-                <Nav pullRight>
-                    <NavItem componentClass={Link} href='/profile' to='/profile' eventKey={6}>
-                        Profile
-                    </NavItem>
-                    <NavItem id="logout-link" onClick={this.handleLogOut} href='/login' to='/login' eventKey={1}>
-                        Log Out
-                    </NavItem>
-                </Nav>
-            </Navbar.Collapse>
-        );
-    }
-
-
     renderLoggedIn() {
         return (
             <Navbar.Collapse>
