@@ -12,7 +12,7 @@ export default class Entity extends React.Component {
 
     render() {
         return (
-            <tr style={{minWidth: '400px'}} key={this.id}>
+            <tr key={this.id}>
                 {this.getEntityRow()}
                 <td key='edit'>
                     {this.getEditButton()}
@@ -27,7 +27,6 @@ export default class Entity extends React.Component {
             <td key={columnName}>{this.props.entity[columnName] ? this.props.entity[columnName].toString() : '-'}</td>);
     }
     
-
     getEditButton() {
         return (
             <Link to={`/admin/${this.props.type}/edit/${this.id}`}>

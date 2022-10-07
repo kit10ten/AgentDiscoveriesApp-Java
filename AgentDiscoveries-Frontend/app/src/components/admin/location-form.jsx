@@ -14,8 +14,6 @@ export default class LocationForm extends React.Component {
             regionId: '',
             latitude: '',
             longitude: '',
-
-
             message: {}
         };
 
