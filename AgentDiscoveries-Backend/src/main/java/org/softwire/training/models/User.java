@@ -7,14 +7,16 @@ public class User {
     private String hashedPassword;
     private Integer agentId; // Nullable
     private boolean admin;
+    private boolean user;
 
     public User() {}
 
-    public User(String username, String hashedPassword, Integer agentId, boolean admin) {
+    public User(String username, String hashedPassword, Integer agentId, boolean admin, boolean user) {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.agentId = agentId;
         this.admin = admin;
+        this.user = user;
     }
 
     public int getUserId() {
@@ -52,4 +54,8 @@ public class User {
     public boolean isAdmin(){return admin;}
 
     public void setAdmin(boolean admin){this.admin=admin;}
+
+    public boolean isUser() {return user;}
+
+    public void setUser(boolean user) {this.user = user;}
 }
