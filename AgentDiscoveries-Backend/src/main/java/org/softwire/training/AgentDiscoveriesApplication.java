@@ -67,9 +67,9 @@ public class AgentDiscoveriesApplication implements Runnable {
 
                 path("/legacy", () -> {
                     before("/*", (request, response) -> response.type("text/plain"));
-                    path("/executivesummary", this::executivesSummaryGroup);
                 });
 
+                path("/executivesummary", this::executivesSummaryGroup);
                 path("/pictures", this::picturesRouteGroup);
                 path("/agents", this::agentsRouteGroup);
                 path("/regions", this::regionsRouteGroup);
@@ -104,9 +104,13 @@ public class AgentDiscoveriesApplication implements Runnable {
 
         get("/healthcheck", (req, res) -> "Server started okay!");
     }
+    
+    
 
     private void executivesSummaryGroup() {
-        post("/generate", executiveSummaryRoutes::readExecutiveSummary);
+        // post("/generate", executiveSummaryRoutes::readExecutiveSummary);
+        get("/", executiveSummaryRoutes::readExecutiveSummary);
+        
     }
 
     private void picturesRouteGroup() {

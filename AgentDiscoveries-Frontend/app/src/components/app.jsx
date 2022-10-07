@@ -18,7 +18,6 @@ import LocationForm from './admin/location-form';
 import RegionForm from './admin/region-form';
 import UserForm from './admin/user-form';
 import Error from './error';
-import ExecutiveSummary from './admin/executive-summary-reports';
 
 export default class App extends React.Component {
     render() {
