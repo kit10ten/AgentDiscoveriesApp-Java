@@ -10,7 +10,7 @@ export default class LocationForm extends React.Component {
         this.state = {
             siteName: '',
             location: '',
-            timeZone: '',
+            validTimezones: '',
             regionId: '',
             latitude: '',
             longitude: '',
@@ -19,11 +19,17 @@ export default class LocationForm extends React.Component {
 
         this.onSiteChange = this.onSiteChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
-        this.onTimeZoneChange = this.onTimeZoneChange.bind(this);
         this.onRegionIdChange = this.onRegionIdChange.bind(this);
         this.onLatitudeChange = this.onLatitudeChange.bind(this);
         this.onLongitudeChange = this.onLongitudeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
+        const validTimezones  = [{
+            value: 'Europe/London', label: 'Europe/London'}];
+
+        const [validTimes, value] = React.useState('validTimezones');
+
+        this.onTimeZoneChange = this.onTimeZoneChange.bind(value);
 
         // In edit mode, the ID of the location is passed in through props
         if (this.props.id) {
@@ -53,13 +59,14 @@ export default class LocationForm extends React.Component {
                                 value={this.state.location}
                                 onChange={this.onLocationChange}/>
                         </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Time Zone</ControlLabel>
-                            <FormControl type='text' required
-                                placeholder='Enter time zone (e.g. "Europe/London")'
-                                value={this.state.timeZone}
-                                onChange={this.onTimeZoneChange}/>
-                        </FormGroup>
+                        <ControlLabel>Timezone</ControlLabel>
+                        <FormControl componentClass='select' 
+                            value={this.validTimezones.value}
+                            onChange={this.onTimeZoneChange}
+                            id='timezone-select'>
+                            <option value='' hidden>Choose a timezone</option>
+                            {this.validTimezones.map((validTimezones) => <option key={validTimezones} value={validTimezones.value}>{validTimezones.label}</option>)}
+                        </FormControl>
                         <FormGroup>
                             <ControlLabel>Region</ControlLabel>
                             <FormControl type='number'
