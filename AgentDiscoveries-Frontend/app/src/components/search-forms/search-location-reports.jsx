@@ -33,8 +33,7 @@ export default class LocationReportsSearch extends React.Component {
         this.loadCallSigns = this.loadCallSigns(this);
         this.loadLocations = this.loadLocations(this);
     }
-
-    render() {
+    render() { 
         return (
             <div className='col-md-8 col-md-offset-2'>
                
