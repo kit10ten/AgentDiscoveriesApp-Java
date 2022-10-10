@@ -34,17 +34,8 @@ export default class LocationReportsSearch extends React.Component {
         this.loadLocations = this.loadLocations(this);
     }
 
-    
-    
-
     render() {
-
-        
-
-        
         return (
-
-    
             <div className='col-md-8 col-md-offset-2'>
                
                 <Form onSubmit={this.onSubmit}>
@@ -165,7 +156,4 @@ export default class LocationReportsSearch extends React.Component {
             return this.setState({ message: { message: error.message, type: 'danger' } });
         }
     }
-
-
-    
 }
