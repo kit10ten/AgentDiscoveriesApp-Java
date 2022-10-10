@@ -14,13 +14,15 @@ export default class SearchResult extends React.Component {
     renderResults(results) {
         return results.map((result, index) => {
             return (
-                <Panel key={index}>
-                    <Panel.Heading>Result - {Object.keys(result).map(key => {
-                        if (key == 'reportTitle')
-                            {if (result[key] != '')
-                                {return 'Report Title | '+result[key];}}
-                    })}</Panel.Heading>
-                    <Panel.Body>{this.renderResultBody(result)}</Panel.Body>
+
+                <Panel key={index} id="collapsible-panel-example-2" defaultCollapse bsStyle="primary" >
+                    <Panel.Heading><Panel.Title toggle>
+                        Result
+                    </Panel.Title></Panel.Heading>
+                    <Panel.Collapse>
+                        <Panel.Body>{this.renderResultBody(result)}</Panel.Body>
+                    </Panel.Collapse>
+
                 </Panel>
             );
         });
