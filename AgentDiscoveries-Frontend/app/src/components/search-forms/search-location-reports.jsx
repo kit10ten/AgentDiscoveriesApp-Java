@@ -13,6 +13,7 @@ export default class LocationReportsSearch extends React.Component {
         super(props);
 
         this.state = {
+            title: '',
             callSign: '',
             locationId: '',
             fromTime: '',
@@ -23,6 +24,7 @@ export default class LocationReportsSearch extends React.Component {
             message: {}
         };
 
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onCallSignChange = this.onCallSignChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onFromChange = this.onFromChange.bind(this);
@@ -94,6 +96,10 @@ export default class LocationReportsSearch extends React.Component {
         );
     }
 
+    onTitleChange(event){
+        this.setState({ title: event.target.value });
+    }
+
     onCallSignChange(event) {
         this.setState({ callSign: event.target.value });
     }
@@ -114,6 +120,7 @@ export default class LocationReportsSearch extends React.Component {
         event.preventDefault();
 
         const params = {
+            title: this.state.title,
             callSign: this.state.callSign,
             locationId: this.state.locationId,
             fromTime: this.state.fromTime && moment.utc(this.state.fromTime).startOf('day').toISOString(),
