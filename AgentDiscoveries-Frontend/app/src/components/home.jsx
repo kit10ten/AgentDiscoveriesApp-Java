@@ -7,7 +7,6 @@ import {isLoggedIn} from './utilities/user-helper';
 import mapboxgl from 'mapbox-gl';
 import '../sass/styles.scss';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZXNlY2FrZTExMiIsImEiOiJjbDkybjdkZHUxaGwwM3ZwMmgzOTlmY2k4In0.H89sgzAyt5sXyGYx5eiP_g';
 
 export default class Home extends React.Component {
 
