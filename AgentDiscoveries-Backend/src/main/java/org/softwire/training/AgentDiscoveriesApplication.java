@@ -67,6 +67,7 @@ public class AgentDiscoveriesApplication implements Runnable {
 
                 path("/legacy", () -> {
                     before("/*", (request, response) -> response.type("text/plain"));
+                    
                 });
 
                 path("/executivesummary", this::executivesSummaryGroup);
@@ -108,9 +109,8 @@ public class AgentDiscoveriesApplication implements Runnable {
     
 
     private void executivesSummaryGroup() {
-        // post("/generate", executiveSummaryRoutes::readExecutiveSummary);
-        get("/", executiveSummaryRoutes::readExecutiveSummary);
-        
+        // get("", executiveSummaryRoutes::readExecutiveSummary);
+        get("/:days", (req, res) -> executiveSummaryRoutes.readExecutiveSummary(req, res));
     }
 
     private void picturesRouteGroup() {

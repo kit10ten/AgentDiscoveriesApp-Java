@@ -95,7 +95,7 @@ export default class NavigationBar extends React.Component {
                     <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={2.3}>
                         Users
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/admin/execsumm' to='/admin/execsumm' eventKey={2.4}>
+                    <MenuItem componentClass={Link} href='/admin/executivesummary' to='/admin/executivesummary' eventKey={2.4}>
                         Exec Summary
                     </MenuItem>
                 </NavDropdown>

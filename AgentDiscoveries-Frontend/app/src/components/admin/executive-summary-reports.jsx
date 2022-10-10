@@ -7,18 +7,18 @@ export default class ExecutiveSummary extends React.Component {
         super(props);
 
         this.state = {
-            executiveSumm: '',
+            loadExecSumm: '',
             message: {}
         };
 
-        this.executiveSumm = this.loadExecSumm(this);
+        this.loadExecSumm = this.loadExecSumm(this);
     }
 
     loadExecSumm(){
         const url = '/executivesummary';
         try {
             apiGet(url).then(resultString => {
-                this.setState({executiveSumm : resultString});
+                this.setState({loadExecSumm : resultString});
                 console.log(resultString);
                 
             });
