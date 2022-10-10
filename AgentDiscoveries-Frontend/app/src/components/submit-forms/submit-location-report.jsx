@@ -43,7 +43,7 @@ export default class LocationReportSubmit extends React.Component {
                     <Messages messages={this.state.messages}/>
 
                     <FormGroup>
-                        <ControlLabel>title</ControlLabel>
+                        <ControlLabel>Title</ControlLabel>
                         <FormControl type='text'
                             required
                             componentClass='textarea' 
