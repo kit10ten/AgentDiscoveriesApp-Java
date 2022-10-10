@@ -27,13 +27,14 @@ public class RegionSummaryReportsDao implements ReportsDao<RegionSummaryReport> 
 
     public int createReport(RegionSummaryReport report) {
         try (Handle handle = jdbi.open()) {
-            return handle.createScript("INSERT INTO region_summary_reports (region_id, agent_id, status, report_time, report_body)" +
+            return handle.createScript("INSERT INTO region_summary_reports (region_id, agent_id, status, report_time, report_body, attachment)" +
                     " VALUES ("
                     + report.getRegionId() + ", "
                     + report.getAgentId() + ", "
                     + report.getStatus() + ", '"
                     + report.getReportTime() + "', '"
-                    + report.getReportBody()
+                    + report.getReportBody() + "', '"
+                    + report.getAttachment()
                     +"')").execute()[0];
         }
     }

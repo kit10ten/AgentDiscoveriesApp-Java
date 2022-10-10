@@ -28,14 +28,15 @@ public class LocationReportsDao implements ReportsDao<LocationStatusReport> {
 
     public int createReport(LocationStatusReport report) {
         try (Handle handle = jdbi.open()) {
-            return handle.createUpdate("INSERT INTO location_reports (report_title, location_id, agent_id, status, report_time, report_body)" +
-                    " VALUES (:report_title, :location_id, :agent_id, :status, :report_time, :report_body)")
+            return handle.createUpdate("INSERT INTO location_reports (report_title, location_id, agent_id, status, report_time, report_body, attachment)" +
+                    " VALUES (:report_title, :location_id, :agent_id, :status, :report_time, :report_body, :attachment)")
                     .bind("report_title", WordUtils.capitalizeFully(report.getReportTitle()))
                     .bind("location_id", report.getLocationId())
                     .bind("agent_id", report.getAgentId())
                     .bind("status", report.getStatus())
                     .bind("report_time", report.getReportTime())
                     .bind("report_body", report.getReportBody())
+                    .bind("attachment", report.getAttachment())
                     .executeAndReturnGeneratedKeys("report_id")
                     .mapTo(Integer.class)
                     .findOnly();
@@ -54,7 +55,7 @@ public class LocationReportsDao implements ReportsDao<LocationStatusReport> {
         String whereClause = ReportsDaoUtils.buildWhereSubClauseFromCriteria(searchCriteria);
 
         try (Handle handle = jdbi.open()) {
-             Query query = handle.createQuery("SELECT report_title, agents.agent_id, location_id, report_body, report_id, status, report_time " +
+             Query query = handle.createQuery("SELECT report_title, agents.agent_id, location_id, report_body, report_id, status, report_time, attachment " +
              "FROM location_reports location LEFT JOIN agents ON agents.agent_id = location.agent_id" + whereClause);
 
              for (ReportSearchCriterion criterion : searchCriteria) {

@@ -16,6 +16,7 @@ export default class LocationReportSubmit extends React.Component {
             status: '',
             reportBody: '',
             sendExternal: false,
+            attachment: '',
 
             messages: []
         };
@@ -25,6 +26,7 @@ export default class LocationReportSubmit extends React.Component {
         this.onStatusChange = this.onStatusChange.bind(this);
         this.onReportBodyChange = this.onReportBodyChange.bind(this);
         this.onExternalChange = this.onExternalChange.bind(this);
+        this.onAttachmentChange = this.onAttachmentChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -87,12 +89,13 @@ export default class LocationReportSubmit extends React.Component {
                             onChange={this.onReportBodyChange}
                             id="report-input"/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup class='form-inline'>
                         <Checkbox type='checkbox'
                             value={this.state.sendExternal}
                             onChange={this.onExternalChange}>
                             Send to external partner
                         </Checkbox>
+                        <input type='file' onChange={this.onAttachmentChange} />
                     </FormGroup>
                     <Button type='submit' id="submit-report">Submit</Button>
                 </Form>
@@ -120,6 +123,14 @@ export default class LocationReportSubmit extends React.Component {
         this.setState({ sendExternal: event.target.checked });
     }
 
+    onAttachmentChange(event) {
+        if (event.target.files[0].name.slice(-3) == 'png'){
+            this.setState({ attachment: event.target.files[0].blob() });}
+        else {
+            this.addMessage('Uploaded file is the incorrect type! ' + event.target.files[0].name.slice(-3), 'danger');
+        }
+    }
+
     onSubmit(event) {
         event.preventDefault();
 
@@ -130,7 +141,8 @@ export default class LocationReportSubmit extends React.Component {
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,
-            sendExternal: this.state.sendExternal
+            sendExternal: this.state.sendExternal,
+            attachment: this.state.attachment
         };
 
         apiPost('reports/locationstatuses', body)

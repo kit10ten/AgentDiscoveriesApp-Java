@@ -1,5 +1,6 @@
 package org.softwire.training.models;
 
+import java.sql.Blob;
 import java.time.LocalDateTime;
 
 public class ReportBase {
@@ -10,6 +11,7 @@ public class ReportBase {
     private LocalDateTime reportTime; // Always UTC in the DB
     private String reportBody;
     private int agentId;
+    private Blob attachment;
 
     public int getReportId() {
         return reportId;
@@ -54,4 +56,8 @@ public class ReportBase {
     public int getAgentId() { return agentId; }
 
     public void setAgentId(int agentId) { this.agentId = agentId; }
+
+    public Blob getAttachment() { return this.attachment; }
+
+    public void setAttachment(Blob attachment) { this.attachment = attachment; }
 }
