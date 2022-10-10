@@ -19,6 +19,7 @@ export default class LocationReportsSearch extends React.Component {
             toTime: '',
             callSigns:[],
             results: [],
+            locationsArr: [],
             message: {}
         };
 
@@ -28,6 +29,7 @@ export default class LocationReportsSearch extends React.Component {
         this.onToChange = this.onToChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.loadCallSigns = this.loadCallSigns(this);
+        this.loadLocations = this.loadLocations(this);
     }
 
     
@@ -50,7 +52,7 @@ export default class LocationReportsSearch extends React.Component {
 
                     <FormGroup >
                         <ControlLabel>Agent Call Sign</ControlLabel>
-                        <FormControl  onMouseMove={this.loadCallSigns} type="text" list="data" onChange={this._onChange} />
+                        <FormControl  onLoad={this.loadCallSigns} type="text" list="data" onChange={this._onChange} />
                         
                         <datalist id="data">
                             {this.state.callSigns.map((item,index) =>
@@ -62,10 +64,17 @@ export default class LocationReportsSearch extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
-                        <FormControl type='number'
+                        <FormControl onLoad={this.loadLocations} type='number'
                             placeholder='Enter location ID'
                             value={this.state.locationId}
-                            onChange={this.onLocationChange}/>
+                            onChange={this.onLocationChange}
+                            list="dataLocations" />
+
+                        <datalist id="dataLocations">
+                            {this.state.locationsArr.map((item, index) =>
+                                <option key={index} value={item.locationId} >{item.location}</option>
+                            )}
+                        </datalist>
                     </FormGroup>
                     <FormGroup className='form-inline'>
                         <ControlLabel className='rm-3'>From</ControlLabel>
@@ -133,6 +142,23 @@ export default class LocationReportsSearch extends React.Component {
             return this.setState({ message: { message: error.message, type: 'danger' } });
         }
     }
+
+    loadLocations(event){
+
+        const url = '/locations';
+
+        try {
+            apiGet(url).then(resultarr => {
+                console.log(resultarr[0]);
+                this.setState({ locationsArr : resultarr});
+                console.log(this.setState.locationsArr[0]);
+            });
+
+        } catch (error) {
+            return this.setState({ message: { message: error.message, type: 'danger' } });
+        }
+    }
+
 
     
 }
