@@ -36,7 +36,7 @@ export default class ExecutiveSummary extends React.Component {
             <div className='col-md-8 col-md-offset-2'>
                 <h3>Executive Summary Reports</h3>
                 <div>
-                    {this.state.executiveSumm}
+                    {this.state.loadExecSumm}
                 </div>
             </div>
         );

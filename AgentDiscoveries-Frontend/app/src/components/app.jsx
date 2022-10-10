@@ -36,7 +36,7 @@ export default class App extends React.Component {
                         <Route path='/admin/regions' exact render={() => <Page><Entities api='regions' key='regions'/></Page>} />
                         <Route path='/admin/users' exact render={() => <Page><Entities api='users' key='users'/></Page>} />
                         {/* added execsumm route PJB */}
-                        <Route path='/admin/executivesummary' exact render={() => <Page><ExecutiveSummary /></Page>} />
+                        <Route path='/admin/executivesummary' exact render={() => <Page><ExecutiveSummary/></Page>} />
 
                         <Route path='/admin/locations/add' render={() => <Page><LocationForm/></Page>} />
                         <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />

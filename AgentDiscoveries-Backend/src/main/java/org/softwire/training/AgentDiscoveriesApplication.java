@@ -109,8 +109,7 @@ public class AgentDiscoveriesApplication implements Runnable {
     
 
     private void executivesSummaryGroup() {
-        // get("", executiveSummaryRoutes::readExecutiveSummary);
-        get("/:days", (req, res) -> executiveSummaryRoutes.readExecutiveSummary(req, res));
+        get("", (req, res) -> executiveSummaryRoutes.readExecutiveSummary(req, res));
     }
 
     private void picturesRouteGroup() {
