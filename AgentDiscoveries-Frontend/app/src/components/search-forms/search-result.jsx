@@ -17,8 +17,8 @@ export default class SearchResult extends React.Component {
                 <Panel key={index}>
                     <Panel.Heading>Result - {Object.keys(result).map(key => {
                         if (key == 'reportTitle')
-                            {if (result[key] != '')
-                                {return 'Report Title | '+result[key];}}
+                        {if (result[key] != '')
+                        {return 'Report Title | '+result[key];}}
                     })}</Panel.Heading>
                     <Panel.Body>{this.renderResultBody(result)}</Panel.Body>
                 </Panel>
@@ -29,9 +29,9 @@ export default class SearchResult extends React.Component {
     renderResultBody(result) {
         return Object.keys(result).map(key => {
             if (result[key] == null || result[key] == '')
-                {return null;}
+            {return null;}
             if (key == 'reportTitle')
-                {return null;}
+            {return null;}
             return <p key={key} id={key}>{`${key}: ${result[key]}`}</p>;
         });
     }
