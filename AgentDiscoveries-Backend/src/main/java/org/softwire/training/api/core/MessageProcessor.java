@@ -50,11 +50,13 @@ public class MessageProcessor {
     }
 
     public String encode(String input){
-        return applyShiftCipher(input, getCodeWord(), false);
+        return encrptAES(input);
+        // return applyShiftCipher(input, getCodeWord(), false);
     }
 
     public String decode(String input){
-        return applyShiftCipher(input, getCodeWord(), true);
+        return decryptAES(input);
+        // return applyShiftCipher(input, getCodeWord(), true);
     }
 
     private String applyShiftCipher(String input, String codeWord, boolean invert) {
@@ -71,6 +73,30 @@ public class MessageProcessor {
         }
 
         return result.toString();
+    }
+
+    private String encrptAES(String input) {
+        try {
+            AesEncryption aes_encryption = new AesEncryption();
+            aes_encryption.init();
+
+            String encryptedData = aes_encryption.encrypt(input);
+            return encryptedData;
+        } catch (Exception exception) {
+            return "";
+        }
+    }
+
+    private String decryptAES(String encryptedData) {
+        try {
+            AesEncryption aes_encryption = new AesEncryption();
+            aes_encryption.init();
+
+            String decryptedData = aes_encryption.decrypt(encryptedData);
+            return decryptedData;
+        } catch (Exception exception) {
+            return "";
+        }
     }
 
     /**
