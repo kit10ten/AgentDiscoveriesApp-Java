@@ -14,6 +14,7 @@ module.exports = {
     },
 
     module: {
+        noParse: /(mapbox-gl)\.js$/,
         rules: [{
             test: /\.scss$/,
             use: [
@@ -30,7 +31,9 @@ module.exports = {
         {
             test: /\.jsx?$/,
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            use: {
+                loader: 'babel-loader',
+              }
         },
         {
             test: /\.(png|svg|jpg|gif)$/,

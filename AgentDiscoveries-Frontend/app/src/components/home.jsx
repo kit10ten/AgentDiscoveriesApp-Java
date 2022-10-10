@@ -1,12 +1,15 @@
 // import * as React from 'react';
 import React, {createRef} from 'react';
 //import { Redirect } from 'react-router-dom';
-
 import {Link} from 'react-router-dom';
 import {isLoggedIn} from './utilities/user-helper';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
 
+mapboxgl.workerClass = MapboxWorker;
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZXNlY2FrZTExMiIsImEiOiJjbDkybjdkZHUxaGwwM3ZwMmgzOTlmY2k4In0.H89sgzAyt5sXyGYx5eiP_g';
 
 export default class Home extends React.Component {
 
@@ -22,7 +25,6 @@ export default class Home extends React.Component {
             map: createRef(null)
         };
 
-        console.log(this.props);
         console.log(this.state);
 
         const mapContainer = createRef(null);
@@ -39,15 +41,13 @@ export default class Home extends React.Component {
         if(this.state.map) return;
         const map = new mapboxgl.Map({
             container: this.state.mapContainer,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.props.latitude, this.state.longitude],
+            style: 'mapbox://styles/cheesecake112/cl92nc8dw009u14nrza9xc1wm',
+            center: [this.state.latitude, this.state.longitude],
             zoom: this.state.zoom
         });
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
     }
 
-    
-    
     componentWillUnmount() {
         if(!this.state.map) return;
         this.state.map.on('move', () => {
@@ -59,7 +59,6 @@ export default class Home extends React.Component {
         });    
     }
 
-   
     render() {
         const renderAuthButton = () => {
             if (!isLoggedIn()) {
@@ -85,14 +84,12 @@ export default class Home extends React.Component {
                     </p>
                     <div>
                         <h1>Map</h1>
-                        <div className='mapContainer' ref={this.state.mapContainer}/>
+                        <div className='mapContainer' ref={this.props.mapContainer}/>
                     </div>  
                 </main>
                 {renderAuthButton()}
             </div>
-            
-        );
-            
+        );    
     }
 }
 
