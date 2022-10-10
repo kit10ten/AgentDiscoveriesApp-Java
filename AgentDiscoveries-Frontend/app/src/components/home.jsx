@@ -1,11 +1,11 @@
-import * as React from 'react';
-
+// import * as React from 'react';
+import React, {createRef} from 'react';
 //import { Redirect } from 'react-router-dom';
 
 import {Link} from 'react-router-dom';
 import {isLoggedIn} from './utilities/user-helper';
 import mapboxgl from 'mapbox-gl';
-import '../sass/styles.scss';
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZXNlY2FrZTExMiIsImEiOiJjbDkybjdkZHUxaGwwM3ZwMmgzOTlmY2k4In0.H89sgzAyt5sXyGYx5eiP_g';
 
@@ -14,43 +14,56 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        const mapContainer = React.useRef(null);
-        const map = React.useRef(null);
-        const [longitude, setLongitude] = React.useState(-0.12590142494217288);
-        const [latitude, setLatitude] = React.useState(51.49412512139892);
-        const [zoom, setZoom] = React.useState(9);
-
-        React.useEffect(() => {
-            if(map.current) return;
-            const map = new mapboxgl.Map({
-                container: mapContainer.current,
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [latitude, longitude],
-                zoom: zoom
-            });
-        });
-
-        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-        React.useEffect(() => {
-            if(!map.current) return;
-            map.current.on('move', () => {
-                setLatitude(map.current.getCenter().longitude.toFixed(4));
-                setLongitude(map.current.getCenter().latitude.toFixed(4));
-                setZoom(map.current.getZoom().toFixed(2));
-            });
-        });
-
         this.state = {
             isLoggedIn: isLoggedIn(),
-            
+            latitude: 0,
+            longitude: 0,
+            zoom: 0,
+            mapContainer: createRef(null),
+            map: createRef(null)
         };
+
+        console.log(this.props);
+        console.log(this.state);
+
+        const mapContainer = createRef(null);
+        console.log(mapContainer);
+        this.setState({
+            longitude: -0.12590142494217288,
+            latitude: 51.49412512139892,
+            zoom: 9
+        });
+ 
     }
 
+    componentDidMount() {
+        if(this.state.map) return;
+        const map = new mapboxgl.Map({
+            container: this.state.mapContainer,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [this.props.latitude, this.state.longitude],
+            zoom: this.state.zoom
+        });
+        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    }
+
+    
+    
+    componentWillUnmount() {
+        if(!this.state.map) return;
+        this.state.map.on('move', () => {
+            this.setState({
+                longitude: this.state.map.getCenter().longitude.toFixed(4),
+                latitude: this.state.map.getCenter().latitude.toFixed(4),
+                zoom: this.state.map.getZoom().toFixed(2)
+            });
+        });    
+    }
+
+   
     render() {
         const renderAuthButton = () => {
             if (!isLoggedIn()) {
-            
                 return <Link to="/login"><button type="button" className="btn btn-primary" >Login</button></Link>;
             }
         };
@@ -72,14 +85,15 @@ export default class Home extends React.Component {
                         If you require immediete assistance, please email our head agent, rogerthebestagent@aeaoa.softwire.agent.com
                     </p>
                     <div>
-                        <div className='map-container' ref={mapContainer}/>
-                    </div>
+                        <h1>Map</h1>
+                        <div className='mapContainer' ref={this.state.mapContainer}/>
+                    </div>  
                 </main>
                 {renderAuthButton()}
             </div>
             
         );
-        
+            
     }
 }
 
