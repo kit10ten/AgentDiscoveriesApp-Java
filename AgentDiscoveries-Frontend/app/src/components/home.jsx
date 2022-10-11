@@ -40,13 +40,13 @@ export default class Home extends React.Component {
         const {longitude, latitude, zoom} = this.state;
         const map = new mapboxgl.Map({
             container: this.mapContainer.current,
-            // style: 'mapbox://styles/cheesecake112/cl92nc8dw009u14nrza9xc1wm',
             style: 'mapbox://styles/mapbox/dark-v10',
             center: [longitude, latitude],
             zoom: zoom
         });
-        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
+        map.addControl(new mapboxgl.FullscreenControl());
+        
         map.on('move', () => {
             this.setState({
                 longitude: this.state.map.getCenter().longitude.toFixed(4),
@@ -81,7 +81,8 @@ export default class Home extends React.Component {
                     </p>
                     <div>
                         <h1>Map</h1>
-                        <div ref={this.mapContainer} className='mapContainer'/>
+                        {/* <div id='map'/> */}
+                        <div ref={this.mapContainer} className='mapContainer' id='static'/>
                     </div>  
                 </main>
                 {renderAuthButton()}
