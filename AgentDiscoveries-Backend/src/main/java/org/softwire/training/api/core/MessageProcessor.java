@@ -49,13 +49,13 @@ public class MessageProcessor {
         this(configuration.getString("message.encoding.seed"));
     }
 
-    public String encode(String input, AesEncryption key) throws Exception{
-        return encrptAES(input, key);
+    public String encode(String input){
+        return encrptAES(input);
         // return applyShiftCipher(input, getCodeWord(), false);
     }
 
-    public String decode(String input, AesEncryption key) throws Exception{
-        return decryptAES(input, key);
+    public String decode(String input){
+        return decryptAES(input);
         // return applyShiftCipher(input, getCodeWord(), true);
     }
 
@@ -75,14 +75,28 @@ public class MessageProcessor {
         return result.toString();
     }
 
-    private String encrptAES(String input, AesEncryption key) throws Exception {
-        String encryptedData = key.encrypt(input);
-        return encryptedData;
+    private String encrptAES(String input) {
+        try {
+            AesEncryption aes_encryption = new AesEncryption();
+            aes_encryption.init();
+
+            String encryptedData = aes_encryption.encrypt(input);
+            return encryptedData;
+        } catch (Exception exception) {
+            return "";
+        }
     }
 
-    private String decryptAES(String encryptedData, AesEncryption key) throws Exception {
-        String decryptedData = key.decrypt(encryptedData);
-        return decryptedData;
+    private String decryptAES(String encryptedData) {
+        try {
+            AesEncryption aes_encryption = new AesEncryption();
+            aes_encryption.init();
+
+            String decryptedData = aes_encryption.decrypt(encryptedData);
+            return decryptedData;
+        } catch (Exception exception) {
+            return "";
+        }
     }
 
     /**

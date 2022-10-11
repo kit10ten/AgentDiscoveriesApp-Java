@@ -9,7 +9,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.softwire.training.api.core.AesEncryption;
 import org.softwire.training.api.core.MessageProcessor;
 import org.softwire.training.api.integration.helper.LoginHelper;
 import org.softwire.training.api.integration.helper.WebDriverHelper;
@@ -30,13 +29,11 @@ public class DailyMessageIT {
    }
 
    @Test
-   public void testCanEncodeAndDecodeMessage() throws Exception {
+   public void testCanEncodeAndDecodeMessage() {
        MessageProcessor messageProcessor = new MessageProcessor("dev");
-       AesEncryption aes_encryption = new AesEncryption();
-        aes_encryption.init();
 
        String plaintext = "aTestMessage";
-       String encoded = messageProcessor.encode(plaintext, aes_encryption);
+       String encoded = messageProcessor.encode(plaintext);
 
        driver.get(TARGET_ADDRESS);
        LoginHelper.ensureLoggedIn(driver);

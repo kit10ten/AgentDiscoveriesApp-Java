@@ -9,7 +9,6 @@ import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.JdbiException;
-import org.softwire.training.api.core.AesEncryption;
 import org.softwire.training.api.core.ExceptionMapper;
 import org.softwire.training.api.core.JsonResponseTransformer;
 import org.softwire.training.api.models.ErrorCode;
@@ -79,15 +78,9 @@ public class AgentDiscoveriesApplication implements Runnable {
                 setupBasicEntityCrudRoutes("/locations", locationsRoutes);
                 get("/locations", locationsRoutes::readEntities, responseTransformer);
                 setupBasicEntityCrudRoutes("/users", usersRoutes);
-                
-                AesEncryption aes_encryption = new AesEncryption();
-                try {
-                    aes_encryption.init();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                post("/decodemessage", (req, res)-> messageProcessorRoutes.decodeMessage(req, res, aes_encryption), responseTransformer);
-                post("/encodemessage", (req, res) -> messageProcessorRoutes.encodeMessage(req, res, aes_encryption), responseTransformer);
+
+                post("/decodemessage", messageProcessorRoutes::decodeMessage, responseTransformer);
+                post("/encodemessage", messageProcessorRoutes::encodeMessage, responseTransformer);
 
                 // API endpoint to initiate shutdown
                 put("/operations/shutdown", this::shutdown);
