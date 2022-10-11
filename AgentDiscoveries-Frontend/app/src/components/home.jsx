@@ -3,11 +3,11 @@ import React, {createRef} from 'react';
 //import { Redirect } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {isLoggedIn} from './utilities/user-helper';
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+import mapboxgl from '!mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
+//import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
 
-mapboxgl.workerClass = MapboxWorker;
+//mapboxgl.workerClass = MapboxWorker;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZXNlY2FrZTExMiIsImEiOiJjbDkybjdkZHUxaGwwM3ZwMmgzOTlmY2k4In0.H89sgzAyt5sXyGYx5eiP_g';
 
@@ -18,16 +18,15 @@ export default class Home extends React.Component {
 
         this.state = {
             isLoggedIn: isLoggedIn(),
-            latitude: 0,
-            longitude: 0,
-            zoom: 0,
-            mapContainer: createRef(null),
-            map: createRef(null)
+            latitude: 51.49412512139892,
+            longitude: -0.12590142494217288,
+            zoom: 9,
+           
         };
-
+        this.mapContainer = React.createRef();
         console.log(this.state);
 
-        const mapContainer = createRef(null);
+        const mapContainer = createRef();
         console.log(mapContainer);
         this.setState({
             longitude: -0.12590142494217288,
@@ -38,19 +37,17 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.map) return;
+        const {longitude, latitude, zoom} = this.state;
         const map = new mapboxgl.Map({
-            container: this.state.mapContainer,
-            style: 'mapbox://styles/cheesecake112/cl92nc8dw009u14nrza9xc1wm',
-            center: [this.state.latitude, this.state.longitude],
-            zoom: this.state.zoom
+            container: this.mapContainer.current,
+            // style: 'mapbox://styles/cheesecake112/cl92nc8dw009u14nrza9xc1wm',
+            style: 'mapbox://styles/mapbox/dark-v10',
+            center: [longitude, latitude],
+            zoom: zoom
         });
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    }
 
-    componentWillUnmount() {
-        if(!this.state.map) return;
-        this.state.map.on('move', () => {
+        map.on('move', () => {
             this.setState({
                 longitude: this.state.map.getCenter().longitude.toFixed(4),
                 latitude: this.state.map.getCenter().latitude.toFixed(4),
@@ -58,7 +55,7 @@ export default class Home extends React.Component {
             });
         });    
     }
-
+    
     render() {
         const renderAuthButton = () => {
             if (!isLoggedIn()) {
@@ -84,7 +81,7 @@ export default class Home extends React.Component {
                     </p>
                     <div>
                         <h1>Map</h1>
-                        <div className='mapContainer' ref={this.props.mapContainer}/>
+                        <div ref={this.mapContainer} className='mapContainer'/>
                     </div>  
                 </main>
                 {renderAuthButton()}
