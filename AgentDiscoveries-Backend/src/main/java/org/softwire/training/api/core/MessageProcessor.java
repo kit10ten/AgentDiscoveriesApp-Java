@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The MessageProcessor selects a word from a list and applies a shift cipher.
@@ -49,16 +50,18 @@ public class MessageProcessor {
         this(configuration.getString("message.encoding.seed"));
     }
 
-    public String encode(String input){
-        return applyShiftCipher(input, getCodeWord(), false);
+    public String encode(String input, int[] key){
+        return applyShiftCipher(input, getCodeWord(), false, key);
     }
 
-    public String decode(String input){
-        return applyShiftCipher(input, getCodeWord(), true);
+    public String decode(String input, int[] key){
+        return applyShiftCipher(input, getCodeWord(), true, key);
     }
 
-    private String applyShiftCipher(String input, String codeWord, boolean invert) {
+    private String applyShiftCipher(String input, String codeWord, boolean invert, int[] key) {
         StringBuilder result = new StringBuilder();
+        int j = 0;
+
 
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
@@ -71,6 +74,15 @@ public class MessageProcessor {
         }
 
         return result.toString();
+    }
+
+    public int[] generateKey() {
+        int[] key = new int[5];
+        for (int i = 0; i< key.length; i++) {
+            key[i] = ThreadLocalRandom.current().nextInt(1, 10);
+        }
+
+        return key;
     }
 
     /**

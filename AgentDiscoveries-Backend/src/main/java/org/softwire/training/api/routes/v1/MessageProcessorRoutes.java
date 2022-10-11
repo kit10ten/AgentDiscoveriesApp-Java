@@ -17,15 +17,15 @@ public class MessageProcessorRoutes {
         this.messageProcessor = messageProcessor;
     }
 
-    public Message encodeMessage(Request req, Response res) {
+    public Message encodeMessage(Request req, Response res, int[] key) {
         Message message = JsonRequestUtils.readBodyAsType(req, Message.class);
-        String encoded = messageProcessor.encode(message.getMessage());
+        String encoded = messageProcessor.encode(message.getMessage(), key);
         return new Message(encoded);
     }
 
-    public Message decodeMessage(Request req, Response res) {
+    public Message decodeMessage(Request req, Response res, int[] key) {
         Message message = JsonRequestUtils.readBodyAsType(req, Message.class);
-        String decoded = messageProcessor.decode(message.getMessage());
+        String decoded = messageProcessor.decode(message.getMessage(), key);
         return new Message(decoded);
     }
 }

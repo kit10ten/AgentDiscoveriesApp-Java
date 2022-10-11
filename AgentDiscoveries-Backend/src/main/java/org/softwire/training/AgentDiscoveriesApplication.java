@@ -11,6 +11,7 @@ import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.JdbiException;
 import org.softwire.training.api.core.ExceptionMapper;
 import org.softwire.training.api.core.JsonResponseTransformer;
+import org.softwire.training.api.core.key;
 import org.softwire.training.api.models.ErrorCode;
 import org.softwire.training.api.models.FailedRequestException;
 import org.softwire.training.api.routes.v1.*;
@@ -79,8 +80,10 @@ public class AgentDiscoveriesApplication implements Runnable {
                 get("/locations", locationsRoutes::readEntities, responseTransformer);
                 setupBasicEntityCrudRoutes("/users", usersRoutes);
 
-                post("/decodemessage", messageProcessorRoutes::decodeMessage, responseTransformer);
-                post("/encodemessage", messageProcessorRoutes::encodeMessage, responseTransformer);
+                key key = new key();
+                key.generateKey();
+                post("/decodemessage", (req, res) -> messageProcessorRoutes.decodeMessage(req, res, key.getKey()), responseTransformer);
+                post("/encodemessage", (req, res) -> messageProcessorRoutes.encodeMessage(req, res, key.getKey()), responseTransformer);
 
                 // API endpoint to initiate shutdown
                 put("/operations/shutdown", this::shutdown);
