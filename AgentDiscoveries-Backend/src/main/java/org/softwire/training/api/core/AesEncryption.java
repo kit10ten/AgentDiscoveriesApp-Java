@@ -5,7 +5,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 
-import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
+// import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
 
 import java.util.Base64;
 
@@ -44,6 +44,10 @@ public class AesEncryption {
 
     private byte[] decode(String data) {
         return Base64.getDecoder().decode(data);
+    }
+
+    public SecretKey getKey() {
+        return this.key;
     }
     
 }
