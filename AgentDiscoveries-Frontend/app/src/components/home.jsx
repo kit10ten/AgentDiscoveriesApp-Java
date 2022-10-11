@@ -4,12 +4,12 @@ import React, {createRef} from 'react';
 import {Link} from 'react-router-dom';
 import {isLoggedIn} from './utilities/user-helper';
 import mapboxgl from '!mapbox-gl';
+//import MapboxGeocoder from '!mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 //import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
 
 //mapboxgl.workerClass = MapboxWorker;
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZXNlY2FrZTExMiIsImEiOiJjbDkybjdkZHUxaGwwM3ZwMmgzOTlmY2k4In0.H89sgzAyt5sXyGYx5eiP_g';
 
 export default class Home extends React.Component {
 
@@ -40,20 +40,29 @@ export default class Home extends React.Component {
         const {longitude, latitude, zoom} = this.state;
         const map = new mapboxgl.Map({
             container: this.mapContainer.current,
-            style: 'mapbox://styles/mapbox/dark-v10',
+            style: 'mapbox://styles/cheesecake112/cl92nc8dw009u14nrza9xc1wm', // effort in optimization 
             center: [longitude, latitude],
             zoom: zoom
         });
 
         map.addControl(new mapboxgl.FullscreenControl());
+
+
+        // disable map rotation using right click + drag
+        map.dragRotate.disable();
+ 
+        // disable map rotation using touch rotation gesture
+        map.touchZoomRotate.disableRotation();
+
+
         
-        map.on('move', () => {
-            this.setState({
-                longitude: this.state.map.getCenter().longitude.toFixed(4),
-                latitude: this.state.map.getCenter().latitude.toFixed(4),
-                zoom: this.state.map.getZoom().toFixed(2)
-            });
-        });    
+        // map.on('move', () => {
+        //     this.setState({
+        //         longitude: this.state.map.longitude.toFixed(4),
+        //         latitude: this.state.map.latitude.toFixed(4),
+        //         zoom: this.state.map.getZoom().toFixed(2)
+        //     });
+        // });    
     }
     
     render() {
