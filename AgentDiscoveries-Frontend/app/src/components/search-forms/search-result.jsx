@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Panel} from 'react-bootstrap';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 export default class SearchResult extends React.Component {
     render() {
@@ -24,8 +25,12 @@ export default class SearchResult extends React.Component {
                             }
                         })}
                     </Panel.Heading>
-                    <Panel.Body>{this.renderResultBody(result)}</Panel.Body>
-                    <Panel.Footer><button onClick={() => alert('Your PDF is in another castle')}>Export to PDF</button></Panel.Footer>
+                    <Panel.Body>
+                        {this.renderResultBody(result)}
+                    </Panel.Body>
+                    <Panel.Footer>
+                        <button onClick={() => alert('Your PDF is in another castle')}>Export to PDF</button>
+                    </Panel.Footer>
                 </Panel>
             );
         });
