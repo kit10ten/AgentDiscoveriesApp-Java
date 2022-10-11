@@ -24,13 +24,10 @@ public class MessageProcessorTest {
     }
 
     @Test
-    public void encodeAndDecodeRoundTrip() throws Exception {
-        AesEncryption aes_encryption = new AesEncryption();
-        aes_encryption.init();
-
+    public void encodeAndDecodeRoundTrip() {
         String input = "hello";
-        String encoded = aes_encryption.encrypt(input);
-        String decoded = aes_encryption.decrypt(encoded);
+        String encoded = messageProcessor.encode(input);
+        String decoded = messageProcessor.decode(encoded);
         assertEquals(input, decoded);
     }
 }
