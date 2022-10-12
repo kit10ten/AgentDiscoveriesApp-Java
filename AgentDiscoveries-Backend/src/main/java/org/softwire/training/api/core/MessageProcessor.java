@@ -66,11 +66,17 @@ public class MessageProcessor {
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
             if (isAsciiPrintable(ch)) {
-                int shift = codeWord.charAt(i % codeWord.length()) - FIRST_PRINTABLE;
-                result.append(shiftPrintableChar(ch, invert ? -shift : shift));
+                if(j == key.length) {
+                    j = 0;
+                }
+                result.append(shiftPrintableChar(ch, invert ? -key[j] : key[j]));
             } else {
+                if(j == key.length) {
+                    j = 0;
+                }
                 result.append(ch);
             }
+            j++;
         }
 
         return result.toString();

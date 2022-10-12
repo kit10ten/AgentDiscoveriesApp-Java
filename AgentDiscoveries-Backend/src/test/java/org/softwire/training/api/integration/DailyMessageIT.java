@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.softwire.training.api.core.MessageProcessor;
+import org.softwire.training.api.core.key;
 import org.softwire.training.api.integration.helper.LoginHelper;
 import org.softwire.training.api.integration.helper.WebDriverHelper;
 
@@ -31,9 +32,11 @@ public class DailyMessageIT {
    @Test
    public void testCanEncodeAndDecodeMessage() {
        MessageProcessor messageProcessor = new MessageProcessor("dev");
+       key key = new key();
+       key.generateKey();
 
        String plaintext = "aTestMessage";
-       String encoded = messageProcessor.encode(plaintext);
+       String encoded = messageProcessor.encode(plaintext, key.getKey());
 
        driver.get(TARGET_ADDRESS);
        LoginHelper.ensureLoggedIn(driver);
